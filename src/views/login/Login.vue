@@ -28,6 +28,7 @@
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { apiLogin } from "/@/api/login"
+import nProgress from 'nprogress';
 
 const router = useRouter()
 const username = ref('');
@@ -38,10 +39,13 @@ const login = () => {
     password: password.value
   }).then((res) => {
     console.log(res);
+    nProgress.start()
     router.push('/home');
   }).catch(err => {
     console.log(err);
     alert('Login failed. Please check your credentials.');
+  }).finally(() => {
+    nProgress.done()
   })
 };
 </script>
