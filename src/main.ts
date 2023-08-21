@@ -4,6 +4,7 @@ import { registerGlobComp } from './components/registerGlobComp';
 
 import { setupRouter } from './router';
 import { setupStore } from './store';
+import 'normalize.css'
 
 function bootstrap() {
   const app = createApp(App);

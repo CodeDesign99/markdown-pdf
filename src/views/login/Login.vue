@@ -27,14 +27,14 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { apiLogin } from "/@/api/login"
+import { useUserStoreHook } from '/@/store/modules/user'
 import nProgress from 'nprogress';
-
+const userStore = useUserStoreHook()
 const router = useRouter()
 const username = ref('');
 const password = ref('');
 const login = () => {
-  apiLogin('/login', {
+  userStore.loginByUsername({
     username: username.value,
     password: password.value
   }).then((res) => {

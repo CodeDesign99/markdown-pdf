@@ -1,31 +1,23 @@
 <template>
   <nav class="navbar">
-    <ul>
-      <li><router-link to="/">Home</router-link></li>
-      <li><router-link to="/about">About</router-link></li>
-      <!-- 添加其他导航链接 -->
+    <div class="logo"><a href="#">Markdown-PDF</a></div>
+    <ul class="links">
+      <li><a href="hero">Home</a></li>
+      <li><a href="about">About</a></li>
+      <li><a href="services">Services</a></li>
+      <li><a href="contact">Contact</a></li>
     </ul>
+    <a href="#" class=""></a>
+    <div class="toggle_btn">
+      <bars />
+    </div>
   </nav>
 </template>
 
 <script lang="ts" setup>
+import bars from "./icon/bars.svg?component"
+const a = 1
 </script>
 
 <style scoped>
-.navbar {
-  background-color: #333;
-  color: #fff;
-}
-ul {
-  display: flex;
-  list-style: none;
-  padding: 0;
-}
-li {
-  margin-right: 20px;
-}
-a {
-  color: #fff;
-  text-decoration: none;
-}
 </style>
