@@ -1,19 +1,17 @@
 <template>
-  <div>
+  <div class="home">
     <Navbar />
+    <app-main></app-main>
   </div>
 </template>
 <script lang="ts" setup>
-import { log } from 'console';
-import Navbar from './Navbar.vue';
-import { getCodeText } from '/@/api/text';
-import { useUserStoreHook } from '/@/store/modules/user';
-
-const userStore = useUserStoreHook()
-getCodeText({ id: userStore.id }).then(data => {
-  console.log(data);
-}).catch(console.log)
 </script>
-<style lang="">
-
+<style lang="scss" scoped>
+.home {
+  width: 100vw;
+  height: 100vh;
+  background: url('/@/assets/images/background.jpg');
+  background-size: cover;
+  background-position: center;
+}
 </style>

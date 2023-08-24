@@ -3,6 +3,8 @@ import { AxiosCanceler } from '/@/utils/http/axios/axiosCancel';
 import { Modal, notification } from 'ant-design-vue';
 import { unref } from 'vue';
 import nProgress from 'nprogress';
+import { DataInfo, sessionKey } from '/@/utils/auth';
+import { storageSession } from '@pureadmin/utils';
 
 // Don't change the order of creation
 export function setupRouterGuard(router: Router) {
@@ -22,13 +24,36 @@ export function setupRouterGuard(router: Router) {
  */
 function createPageGuard(router: Router) {
   const loadedPageMap = new Map<string, boolean>();
-
-  router.beforeEach(async (to) => {
+  /** 路由白名单 */
+  const whiteList = ["/login"];
+  router.beforeEach(async (to, _from, next) => {
     // The page has already been loaded, it will be faster to open it again, you don’t need to do loading and other processing
     to.meta.loaded = !!loadedPageMap.get(to.path);
     // Notify routing changes
     // setRouteChange(to);
 
+    const userInfo = storageSession().getItem<DataInfo<number>>(sessionKey);
+     /** 如果已经登录并存在登录信息后不能跳转到路由白名单，而是继续保持在当前页面 */
+    function toCorrectRoute() {
+      whiteList.includes(to.fullPath) ? next(_from.fullPath) : next();
+    }
+    if (userInfo) {
+      // 无权限跳转403页面
+      // if (to.meta?.roles && !isOneOfArray(to.meta?.roles, userInfo?.roles)) {
+      //   next({ path: "/error/403" });
+      // }
+      toCorrectRoute();
+    } else {
+      if (to.path !== "/login") {
+        if (whiteList.indexOf(to.path) !== -1) {
+          next();
+        } else {
+          next({ path: "/login" });
+        }
+      } else {
+        next();
+      }
+    }
     return true;
   });
 

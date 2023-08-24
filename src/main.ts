@@ -1,8 +1,8 @@
 import { createApp } from 'vue';
 import App from './App.vue';
 import { registerGlobComp } from './components/registerGlobComp';
-
-import { setupRouter } from './router';
+import { setupRouterGuard } from './router/guard';
+import { router, setupRouter } from './router';
 import { setupStore } from './store';
 import 'normalize.css'
 
@@ -32,7 +32,7 @@ function bootstrap() {
 
   // router-guard
   // 路由守卫
-  // setupRouterGuard(router);
+  setupRouterGuard(router);
 
   // Register global directive
   // 注册全局指令

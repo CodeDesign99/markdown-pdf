@@ -3,6 +3,8 @@ import type { App } from 'vue';
 
 import { createRouter, createWebHashHistory } from 'vue-router';
 import { asyncRoutes, basicRoutes } from './routes';
+import { storageSession } from '@pureadmin/utils';
+import { DataInfo, sessionKey } from '../utils/auth';
 
 // 白名单应该包含基本静态路由
 const WHITE_NAME_LIST: string[] = [];
@@ -44,6 +46,9 @@ export function addRoute(routes: RouteRecordRaw[]) {
 // config router
 // 配置路由器
 export function setupRouter(app: App<Element>) {
+  const id = storageSession().getItem<DataInfo<number>>(sessionKey)?.id
+  if (id) {
+    addRoute(asyncRoutes as RouteRecordRaw[])
+  }
   app.use(router);
-  addRoute(asyncRoutes as RouteRecordRaw[])
 }
