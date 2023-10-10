@@ -1,11 +1,18 @@
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import ViteSvgLoader from 'vite-svg-loader';
+import veauryVitePlugins from 'veaury/vite/index.js'
 import path from "path";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue(), ViteSvgLoader()],
+  plugins: [
+    // vue(),
+    ViteSvgLoader(),
+    veauryVitePlugins({
+      type: 'vue'
+    })
+  ],
   resolve: {
     alias: {
       '/@/': path.resolve(__dirname, '.', 'src') + '/',
@@ -15,8 +22,12 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://localhost:3000',
-        rewrite: path => path.replace(/^\/api/, '')
+        // target: 'http://localhost:3000',
+        target: 'https://124.71.32.191',
+        rewrite: path => {
+          console.log(path);
+          return path.replace(/^\/api/, '')
+        }
       }
     }
   },

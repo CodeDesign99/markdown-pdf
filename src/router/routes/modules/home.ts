@@ -2,9 +2,9 @@ import type { AppRouteModule } from '/@/router/types';
 
 export const homeChildren: AppRouteModule[] = [
   {
-    path: '/about',
-    name: 'About',
-    component: () => import('/@/views/home/Home.vue'),
+    path: '/chat',
+    name: 'Chat',
+    component: () => import('/@/views/chat/Chat.vue'),
     meta: {}
   },
   {

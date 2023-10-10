@@ -5,12 +5,12 @@
       <form class="login-form" @submit.prevent="login">
         <h2>Sign in</h2>
         <div class="inputBox">
-          <input type="text" v-model="username" required>
+          <input type="text" v-model="username" required />
           <span>Username</span>
           <i></i>
         </div>
         <div class="inputBox">
-          <input type="password" v-model="password" required>
+          <input type="password" v-model="password" required />
           <span>Password</span>
           <i></i>
         </div>

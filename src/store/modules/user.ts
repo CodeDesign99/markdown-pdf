@@ -3,7 +3,7 @@ import { store } from "/@/store";
 import { userType } from "/@/store/types";
 import { router, resetRouter, addRoute } from "/@/router";
 import { storageSession } from "@pureadmin/utils";
-import { type DataInfo, setToken, removeToken, sessionKey } from "@/utils/auth";
+import { type DataInfo, setToken, removeToken, sessionKey } from "/@/utils/auth";
 import { getLogin, refreshTokenApi, RefreshTokenResult, UserResult } from "/@/api/user";
 import { asyncRoutes } from "/@/router/routes";
 import { RouteRecordRaw } from "vue-router";
